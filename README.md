@@ -1,4 +1,4 @@
-# 手語/語音辨識系統 (Sign Language/Speech Recognition System)
+# SignBank：AI金融手語雙向翻譯系統 (Bidirectional Sign Language and Speech Recognition System)
 
 一個為銀行服務設計的即時手語和語音辨識系統，支援聾人與銀行員工之間的無障礙溝通。
 
@@ -113,23 +113,7 @@ python app.py
 - 點擊訊息旁的編輯按鈕可修改內容
 - 點擊重新錄製按鈕可重新進行辨識
 
-## API 端點
-
-### 手語辨識
-- `POST /api/sign-language-recognition/frame`
-  - 接收手部關節點資料
-  - 返回辨識結果
-
-### 語音辨識
-- `POST /api/speech-recognition`
-  - 接收音訊檔案
-  - 返回語音轉文字結果
-
-### 回饋系統
-- `POST /api/feedback`
-  - 接收使用者評價
-  - 儲存至資料庫
-
 ## 聯絡資訊
 
 如有任何問題或建議，請聯絡開發團隊。
+email: rosalin200311@gmail.com
