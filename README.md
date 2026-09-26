@@ -27,7 +27,7 @@
 ## 系統需求
 
 ### 硬體
-- **CPU**：8 核心以上（同時跑 TensorFlow、MediaPipe、Whisper、sentence-transformers 這些模型，核心數不夠會很吃力）
+- **CPU**：8 核心以上（同時跑 TensorFlow、MediaPipe、Whisper、sentence-transformers 這些模型）
 - **記憶體**：16GB 以上
 
 ### 軟體
@@ -61,7 +61,7 @@ mongod --dbpath ~/data/db
 Node 後端會連 `mongodb://localhost:27017/SignLanguageApp`，這個資料庫和 collection 會自動建立，不用手動建。
 
 ### 2. 建立 Python 環境（給 Flask 服務用）
-建議在**repo 根目錄**（跟這個 README 同一層）建虛擬環境，這樣可以同時給 `永豐產學/app.py` 和語音辨識腳本共用：
+建議在**repo 根目錄**（跟這個 README 同一層）建虛擬環境，這樣可以同時給 `SignBank/app.py` 和語音辨識腳本共用：
 
 ```bash
 # 需要 Python 3.11（沒有的話用 pyenv 裝：pyenv install 3.11.11）
@@ -74,30 +74,29 @@ pip install "setuptools<81"   # openai-whisper 的舊版 setup.py 需要 pkg_res
 # 安裝 app.py 需要的套件（tensorflow、mediapipe、flask、sentence-transformers…）
 pip install $(python -c "
 import yaml
-d = yaml.safe_load(open('永豐產學/tf215_env.yml'))
+d = yaml.safe_load(open('SignBank/tf215_env.yml'))
 for dep in d['dependencies']:
     if isinstance(dep, dict) and 'pip' in dep:
         print(' '.join(dep['pip']))
 " 2>/dev/null || echo "yaml 模組沒裝，先 pip install pyyaml 再重跑這行")
 
 # 安裝語音辨識需要的套件（whisper、torch）
-pip install --no-build-isolation -r 永豐產學/App/server/speech_recognition/requirements.txt
+pip install --no-build-isolation -r SignBank/App/server/speech_recognition/requirements.txt
 ```
 
-> 也可以用 conda 走一步到位：`conda env create -f 永豐產學/tf215_env.yml`，但 whisper 那份還是要另外用上面的 `--no-build-isolation` 指令裝。
+> 也可以用 conda 走一步到位：`conda env create -f SignBank/tf215_env.yml`，但 whisper 那份還是要另外用上面的 `--no-build-isolation` 指令裝。
 
 ### 3. 設定 API Key
-複製 `永豐產學/App/.env`，把 `OPENROUTER_API_KEY` 換成你自己申請的 key（[openrouter.ai](https://openrouter.ai) 申請）：
+複製 `SignBank/App/.env`，把 `OPENROUTER_API_KEY` 換成你自己申請的 key（[openrouter.ai](https://openrouter.ai) 申請）：
 ```
 HOST=localhost
 DANGEROUSLY_DISABLE_HOST_CHECK=true
 OPENROUTER_API_KEY=你自己的key
 ```
-**這個檔案不要 commit 進 git**（裡面是真實的密鑰）。
 
 ### 4. 前端 + Node 後端
 ```bash
-cd 永豐產學/App
+cd SignBank/App
 npm install
 
 # 讓 Node 後端呼叫 Python 時，用剛剛建的 venv（不設的話會抓到系統的 python，裝的套件對不上）
@@ -110,7 +109,7 @@ npm run dev
 
 ### 5. Python Flask 服務
 ```bash
-cd 永豐產學   # 一定要在這層跑，程式裡有寫死相對路徑（App/.env、rag_sentence.docx）
+cd SignBank   # 一定要在這層跑，程式裡有寫死相對路徑（App/.env、rag_sentence.docx）
 source ../.venv/bin/activate
 python app.py
 ```
@@ -216,7 +215,7 @@ mongod --dbpath ~/data/db
 The Node backend connects to `mongodb://localhost:27017/SignLanguageApp`. The database and collections are created automatically — no manual setup needed.
 
 ### 2. Set up the Python environment (for the Flask service)
-Create the virtual environment in the **repo root** (same level as this README) so it can be shared by both `永豐產學/app.py` and the speech recognition scripts:
+Create the virtual environment in the **repo root** (same level as this README) so it can be shared by both `SignBank/app.py` and the speech recognition scripts:
 
 ```bash
 # Requires Python 3.11 (install via pyenv if needed: pyenv install 3.11.11)
@@ -229,20 +228,20 @@ pip install "setuptools<81"   # openai-whisper's legacy setup.py needs pkg_resou
 # Install the packages app.py needs (tensorflow, mediapipe, flask, sentence-transformers, …)
 pip install $(python -c "
 import yaml
-d = yaml.safe_load(open('永豐產學/tf215_env.yml'))
+d = yaml.safe_load(open('SignBank/tf215_env.yml'))
 for dep in d['dependencies']:
     if isinstance(dep, dict) and 'pip' in dep:
         print(' '.join(dep['pip']))
 " 2>/dev/null || echo "pyyaml not installed — run 'pip install pyyaml' and re-run this line")
 
 # Install the packages speech recognition needs (whisper, torch)
-pip install --no-build-isolation -r 永豐產學/App/server/speech_recognition/requirements.txt
+pip install --no-build-isolation -r SignBank/App/server/speech_recognition/requirements.txt
 ```
 
-> Alternatively, use conda for a one-step setup: `conda env create -f 永豐產學/tf215_env.yml` — but you'll still need the `--no-build-isolation` command above for whisper.
+> Alternatively, use conda for a one-step setup: `conda env create -f SignBank/tf215_env.yml` — but you'll still need the `--no-build-isolation` command above for whisper.
 
 ### 3. Configure the API key
-Copy `永豐產學/App/.env` and replace `OPENROUTER_API_KEY` with your own key (sign up at [openrouter.ai](https://openrouter.ai)):
+Copy `SignBank/App/.env` and replace `OPENROUTER_API_KEY` with your own key (sign up at [openrouter.ai](https://openrouter.ai)):
 ```
 HOST=localhost
 DANGEROUSLY_DISABLE_HOST_CHECK=true
@@ -252,7 +251,7 @@ OPENROUTER_API_KEY=your_own_key
 
 ### 4. Frontend + Node backend
 ```bash
-cd 永豐產學/App
+cd SignBank/App
 npm install
 
 # Point the Node backend to the venv you just created so it can call Python correctly
@@ -266,7 +265,7 @@ Or run them in two separate terminals: `npm start` (frontend) and `PYTHON_PATH=.
 
 ### 5. Python Flask service
 ```bash
-cd 永豐產學   # must run from this directory — the code has hardcoded relative paths (App/.env, rag_sentence.docx)
+cd SignBank   # must run from this directory — the code has hardcoded relative paths (App/.env, rag_sentence.docx)
 source ../.venv/bin/activate
 python app.py
 ```
