@@ -22,10 +22,10 @@ yarn-debug.log*
 yarn-error.log*
 **/.eslintcache
 *.cache/
-<<<<<<< HEAD
 .cache/
-=======
->>>>>>> de7062b1f8fc81784fdee529173b74e70fa66f0a
+
+# ===== Python 虛擬環境 =====
+.venv/
 
 # ===== 圖像與影片等大檔案（避免誤加）=====
 *.gif
@@ -46,8 +46,4 @@ coverage/
 *.orig
 
 # ===== Unity WebGL build (allow inside public/SignPlayer) =====
-<<<<<<< HEAD
 !public/SignPlayer/**
-=======
-!public/SignPlayer/**
->>>>>>> de7062b1f8fc81784fdee529173b74e70fa66f0a

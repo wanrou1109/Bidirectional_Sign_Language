@@ -273,10 +273,7 @@ def start():
     print("🚀 啟動手語辨識系統...")
 
     model_candidates = [
-        "./App/Model/model_1126_2t.keras",#陳家祥：無法載入
-        "./App/Model/model_1126_1t2GRU.keras",#陳家祥：無法載入
-        "./App/Model/model_1126_2t1GRU.keras",#陳家祥：無法載入
-        "./App/Model/model_1126_3GRU.keras", #陳家祥：可以載入
+        "./App/Model/model_1126_3GRU.keras",
         "./App/Model/model_1104_4da_min_delta=5e-4.keras",
         "./App/Model/model_1104_min_delta=5e-4.keras",
         "./App/Model/model_1104_overfitting.keras",
@@ -286,11 +283,6 @@ def start():
         "./App/Model/model_1104_5da_min_delta=5e-4.keras",
         "./App/Model/model_1104_twice_4da_min_delta=5e-4.keras",
         "./App/Model/model3_2da_atten_with_arm.keras",
-        "./App/Model/model2_2da_with_arm.keras",
-        "./App/Model/model1_jnoise_with_arm.keras",
-        "./App/Model/yu2_2da_atten_0907.keras",
-        "./App/Model/yu1_2da_0907.keras",
-        "./App/Model/j1_0907_noise.keras",
         "./App/Model/model_1123_5da.keras",
         "./App/Model/model_hands4_v2.keras",  # 舊模型備用
     ]
@@ -299,6 +291,7 @@ def start():
         'SelfAttention': SelfAttention,
         'CustomLSTM': CustomLSTM,
         'LearnablePositionEmbedding': LearnablePositionEmbedding,
+        'TransformerEncoderBlock': TransformerEncoderBlock,
     }
 
     new_model = None
