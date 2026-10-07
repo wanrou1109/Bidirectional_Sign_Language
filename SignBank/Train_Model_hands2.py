@@ -274,17 +274,6 @@ def start():
 
     model_candidates = [
         "./App/Model/model_1126_3GRU.keras",
-        "./App/Model/model_1104_4da_min_delta=5e-4.keras",
-        "./App/Model/model_1104_min_delta=5e-4.keras",
-        "./App/Model/model_1104_overfitting.keras",
-        "./App/Model/model_1104_twice_3da_min_delta=5e-4.keras",
-        "./App/Model/model_1104_3da_min_delta=5e-4.keras",
-        "./App/Model/model_1104_twice_2da_min_delta=5e-4.keras",
-        "./App/Model/model_1104_5da_min_delta=5e-4.keras",
-        "./App/Model/model_1104_twice_4da_min_delta=5e-4.keras",
-        "./App/Model/model3_2da_atten_with_arm.keras",
-        "./App/Model/model_1123_5da.keras",
-        "./App/Model/model_hands4_v2.keras",  # 舊模型備用
     ]
 
     custom_objs = {
